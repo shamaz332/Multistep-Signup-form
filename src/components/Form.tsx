@@ -1,13 +1,13 @@
 import React from 'react'
-import { Typography } from "@material-ui/core"
+import { Card, CardContent, Typography } from "@material-ui/core"
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
-import { FirstStep } from './FirstStep';
-import { SecondStep } from './SecondStep';
-import { ThirdStep } from './ThirdStep';
+import {FirstStep} from './FirstStep';
+import {SecondStep} from './SecondStep';
+import {ThirdStep} from './ThirdStep';
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
@@ -27,7 +27,7 @@ function getSteps() {
     return ['First Step', 'Second Step', 'Third Step'];
 }
 
-function getStepContent(step: number, handleNext: () => void) {
+function getStepContent(step: number,handleNext: () => void) {
     switch (step) {
         case 0:
             return <FirstStep handleNext={handleNext} />;
@@ -49,9 +49,9 @@ export const Formm = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
 
-    // const handleBack = () => {
-    //     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    // };
+    const handleBack = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    };
 
     const handleReset = () => {
         setActiveStep(0);
@@ -59,35 +59,37 @@ export const Formm = () => {
 
     return (
 
+      
+                <Card >
+<CardContent>
 
-        <div >
-
-            <Stepper activeStep={activeStep} alternativeLabel>
-                {steps.map((label) => (
-                    <Step key={label}>
-                        <StepLabel>{label}</StepLabel>
-                    </Step>
-                ))}
-            </Stepper>
-            <div>
-                {activeStep === steps.length ? (
+                    <Stepper activeStep={activeStep} alternativeLabel>
+                        {steps.map((label) => (
+                            <Step key={label}>
+                                <StepLabel>{label}</StepLabel>
+                            </Step>
+                        ))}
+                    </Stepper>
                     <div>
-                        <Typography className={classes.instructions}>
-                            All steps completed
+        {activeStep === steps.length ? (
+          <div>
+            <Typography className={classes.instructions}>
+              All steps completed
             </Typography>
-                        <Button variant="contained" color="primary" onClick={handleReset}>
-                            Reset
+            <Button variant="contained" color="primary" onClick={handleReset}>
+              Reset
             </Button>
-                    </div>
-                ) : (
-                        <div>
-                            <Typography className={classes.instructions}>
-                                {getStepContent(activeStep, handleNext)}
-                            </Typography>
-                        </div>
-                    )}
-            </div>
-        </div>
+          </div>
+        ) : (
+          <div>
+            <Typography className={classes.instructions}>
+              {getStepContent(activeStep, handleNext)}
+            </Typography>
+          </div>
+        )}
+      </div>
+      </CardContent>
+    </Card>
 
 
     )
