@@ -18,62 +18,74 @@ const initialValues: FormFirstStep = {
 
 }
 
+interface Props {
+    handleNext: () => void;
+}
 
 const validateSchema = Yup.object({
-    firsrName: Yup.string()
-        .max(15, "First Name field should be less than 15"),
-    lastName: Yup.number()
-        .max(15, "Last Name field should be less than 15"),
+    firstName: Yup.string()
+        .max(15, "First Name field should be less than 15")
+        .required("Required"),
+    lastName: Yup.string()
+        .max(15, "Last Name field should be less than 15")
+        .required("Required"),
 
 })
-export const FirstStep = () => {
+export const FirstStep: React.FC<Props> = ({ handleNext }) => {
     return (
-        <Formik
-            initialValues={initialValues}
-            validationSchema={validateSchema}
-            onSubmit={(values) => {
-                setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-
-                }, 400);
-            }}
-        >
-            {formik => (
-                <Form onSubmit={formik.handleSubmit}>
-                    <Grid container>
-                        <Grid item xs={12} sm={6}>
-
-
-                            <Field
-                                as={TextField}
-                                variant="filled"
-                                label="First Name"
-                                name="firstName"
-                                type="text"
-                                onChange={formik.handleChange}
-                                value={formik.values.firstName}
+        <div>
+            <Formik
+                initialValues={initialValues}
+                validationSchema={validateSchema}
+                onSubmit={(values) => {
+                    console.log(values)
+                    handleNext()
+                }}
+            >
+                {({ errors, touched, isValid }) => (
+                    <Form>
+                        <Grid container>
+                            <Grid item xs={12} sm={6}>
 
 
-                            />
+                                <Field
+                                    as={TextField}
+                                    variant="filled"
+                                    label="First Name"
+                                    name="firstName"
+                                    type="text"
+                                    error={errors.firstName && touched.firstName}
+                                    helperText={touched.firstName && errors.firstName}
+
+
+                                />
+                            </Grid>
+                            <br /><br /><br /><br />
+                            <Grid item xs={12} sm={6}>
+                                <Field
+                                    as={TextField}
+                                    variant="filled"
+                                    label="Last Name"
+                                    name="lastName"
+                                    type="text"
+                                    error={errors.lastName && touched.lastName}
+                                    helperText={touched.lastName && errors.lastName}
+
+                                />
+                            </Grid>
+
                         </Grid>
-
-                        <Grid item xs={12} sm={6}>
-                            <Field
-                                as={TextField}
-                                variant="filled"
-                                label="Last Name"
-                                name="lastName"
-                                type="text"
-                                onChange={formik.handleChange}
-                                value={formik.values.lastName}
-
-                            />
-                        </Grid>
-
-                    </Grid>
-
-                </Form>
-            )}
-        </Formik>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            type="submit"
+                            disabled={ !isValid}
+                        >
+                            Next
+          </Button>
+                    </Form>
+                )}
+            </Formik>
+        </div>
     );
 };

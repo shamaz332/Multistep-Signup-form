@@ -24,15 +24,15 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 function getSteps() {
-    return ['First Step', 'Create an ad group', 'Create an ad'];
+    return ['First Step', 'Second Step', 'Third Step'];
 }
 
 function getStepContent(step: number,handleNext: () => void) {
     switch (step) {
         case 0:
-            return <FirstStep />;
+            return <FirstStep handleNext={handleNext} />;
         case 1:
-            return "ae";
+            return <SecondStep handleNext={handleNext} />;
         case 2:
             return "ae";
         default:
@@ -60,7 +60,7 @@ export const Formm = () => {
     return (
 
       
-                <div className={classes.root}>
+                <div >
 
                     <Stepper activeStep={activeStep} alternativeLabel>
                         {steps.map((label) => (
@@ -70,31 +70,24 @@ export const Formm = () => {
                         ))}
                     </Stepper>
                     <div>
-                        {activeStep === steps.length ? (
-                            <div>
-                                <Typography className={classes.instructions}>All steps completed</Typography>
-                                <Button onClick={handleReset}>Reset</Button>
-                            </div>
-                        ) : (
-                                <div>
-                                    <Typography className={classes.instructions}>{getStepContent(activeStep,handleNext)}</Typography>
-                                    <div>
-                                        <Button
-                                            disabled={activeStep === 0}
-                                            onClick={handleBack}
-                                            className={classes.backButton}
-                                        >
-                                            Back
-              </Button>
-                                        <Button variant="contained" color="primary" onClick={handleNext}>
-                                            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                                        </Button>
-                                    </div>
-                                </div>
-                            )}
-                    </div>
-                </div>
-      
+        {activeStep === steps.length ? (
+          <div>
+            <Typography className={classes.instructions}>
+              All steps completed
+            </Typography>
+            <Button variant="contained" color="primary" onClick={handleReset}>
+              Reset
+            </Button>
+          </div>
+        ) : (
+          <div>
+            <Typography className={classes.instructions}>
+              {getStepContent(activeStep, handleNext)}
+            </Typography>
+          </div>
+        )}
+      </div>
+    </div>
 
 
     )
