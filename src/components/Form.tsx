@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardContent, Typography } from "@material-ui/core"
+import { Typography } from "@material-ui/core"
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -49,9 +49,9 @@ export const Formm = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
 
-    const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
+    // const handleBack = () => {
+    //     setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    // };
 
     const handleReset = () => {
         setActiveStep(0);
