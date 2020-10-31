@@ -5,9 +5,9 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
-import {FirstStep} from './FirstStep';
-import {SecondStep} from './SecondStep';
-import {ThirdStep} from './ThirdStep';
+import { FirstStep } from './FirstStep';
+import { SecondStep } from './SecondStep';
+import { ThirdStep } from './ThirdStep';
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
@@ -27,14 +27,14 @@ function getSteps() {
     return ['First Step', 'Second Step', 'Third Step'];
 }
 
-function getStepContent(step: number,handleNext: () => void) {
+function getStepContent(step: number, handleNext: () => void) {
     switch (step) {
         case 0:
             return <FirstStep handleNext={handleNext} />;
         case 1:
             return <SecondStep handleNext={handleNext} />;
         case 2:
-            return "ae";
+            return <ThirdStep handleNext={handleNext} />;
         default:
             return 'Unknown step';
     }
@@ -59,35 +59,35 @@ export const Formm = () => {
 
     return (
 
-      
-                <div >
 
-                    <Stepper activeStep={activeStep} alternativeLabel>
-                        {steps.map((label) => (
-                            <Step key={label}>
-                                <StepLabel>{label}</StepLabel>
-                            </Step>
-                        ))}
-                    </Stepper>
+        <div >
+
+            <Stepper activeStep={activeStep} alternativeLabel>
+                {steps.map((label) => (
+                    <Step key={label}>
+                        <StepLabel>{label}</StepLabel>
+                    </Step>
+                ))}
+            </Stepper>
+            <div>
+                {activeStep === steps.length ? (
                     <div>
-        {activeStep === steps.length ? (
-          <div>
-            <Typography className={classes.instructions}>
-              All steps completed
+                        <Typography className={classes.instructions}>
+                            All steps completed
             </Typography>
-            <Button variant="contained" color="primary" onClick={handleReset}>
-              Reset
+                        <Button variant="contained" color="primary" onClick={handleReset}>
+                            Reset
             </Button>
-          </div>
-        ) : (
-          <div>
-            <Typography className={classes.instructions}>
-              {getStepContent(activeStep, handleNext)}
-            </Typography>
-          </div>
-        )}
-      </div>
-    </div>
+                    </div>
+                ) : (
+                        <div>
+                            <Typography className={classes.instructions}>
+                                {getStepContent(activeStep, handleNext)}
+                            </Typography>
+                        </div>
+                    )}
+            </div>
+        </div>
 
 
     )

@@ -6,13 +6,13 @@ import Button from "@material-ui/core/Button"
 import * as Yup from 'yup';
 
 
-interface FormFirstStep {
+interface FormSecondStep {
     email: String;
     address: String;
 
 }
 
-const initialValues: FormFirstStep = {
+const initialValues: FormSecondStep = {
     email: "",
     address: ""
 
@@ -80,7 +80,7 @@ export const SecondStep: React.FC<Props> = ({ handleNext }) => {
                             variant="contained"
                             color="primary"
                             type="submit"
-                            disabled={ !isValid}
+                            disabled={!isValid}
                         >
                             Next
           </Button>

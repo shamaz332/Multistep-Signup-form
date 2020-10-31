@@ -6,13 +6,13 @@ import Button from "@material-ui/core/Button"
 import * as Yup from 'yup';
 
 
-interface FormFirstStep {
+interface FormThirdStep {
     password: String | null;
     confirmPass: String | null;
 
 }
 
-const initialValues: FormFirstStep = {
+const initialValues: FormThirdStep = {
     password: "",
     confirmPass: "",
 
@@ -30,7 +30,7 @@ const validateSchema = Yup.object({
     confirmPass: Yup.string()
      .oneOf([Yup.ref('password')], 'Passwords must match')
 });
-export const SecondStep: React.FC<Props> = ({ handleNext }) => {
+export const ThirdStep: React.FC<Props> = ({ handleNext }) => {
     return (
         <div>
             <Formik
